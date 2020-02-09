@@ -24,9 +24,9 @@ create(){
     main
     apps=("$@")
     for i in `seq 2 $#`; do
-            app+=${apps[i]}" "
+            app+=" "${apps[i]}" "
     done
-    
+
     if grep -q $2 ~/.automater_workspaces; then
         echo "++$2 workspace already exists 🤥"
     else
@@ -34,7 +34,33 @@ create(){
         echo "++Your workspace is ready 🦊"
     fi
 }
-create $@
+# create $@
+# TO-DO : start function
+start(){
+        main
+        if grep -q $2 ~/.automater_workspaces; then
+            ## openning apps ##
+            echo "hello"
+        else
+            echo "++$2 workspace do not exist 🤥 , please create your workspace"
+        fi
+}
+
+# start $@
+# TO-DO : openning apps
+open(){
+    ## getting the line off workspace ##
+    workSpaceLineNumber=`awk "/$2/{ print NR; exit }" ~/.automater_workspaces`
+    ## getting worspace apps (q quits when line number is NUM , d deletes it instead of printing it)##
+    result=`sed "${workSpaceLineNumber}q;d" ~/.automater_workspaces`
+    ## eliminating spaces ##
+    IFS=' ' read -ra apps <<< "$result"
+    ## openning apps ##
+    for i in `seq 2 ${#apps[@]}`; do
+        ## TO FIX ##
+        `open -a Sublime`
+    done
+}
+open
 # TO-DO : delete function
 # TO-DO : close function
-# TO-DO : start function
