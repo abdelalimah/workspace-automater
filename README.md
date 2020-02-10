@@ -4,7 +4,7 @@
 
 ## Setup : copy and past the following command in your terminal
 
-git clone https://github.com/abdelalimah/workspaceAutomater.git && sudo bash workspaceAutomater/automater.sh setup && chmod +x  workspaceAutomater/automater.sh && cd && rm -rf workspaceAutomater
+git clone https://github.com/abdelalimah/workspaceAutomater.git && sudo bash workspaceAutomater/automater.sh setup && cd && rm -rf workspaceAutomater
 
 ## Creating a workspace
 automater create mySpace phpStorm HazeOver ...
