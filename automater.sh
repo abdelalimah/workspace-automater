@@ -80,7 +80,7 @@ launch(){
                     echo "++the app ${apps[i]} do not exist 😩 "
                     continue
                 else
-                    echo "++found ${apps[i]} opening ..🌪 "
+                    echo "++opening ${apps[i]} ..🌪 "
                     ## TO FIX AT THE NEXT UPDATE v(app name) ##
                     v1="${result/\.\//}"
                     v2="${v1/\.app/}"
