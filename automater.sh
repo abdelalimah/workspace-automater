@@ -70,7 +70,7 @@ launch(){
     workSpaceLineNumber=`awk "/$2/{ print NR; exit }" ~/.automater_workspaces`
     ## getting worKspace apps (q quits when line number is NUM , d deletes it instead of printing it)##
     result=`sed "${workSpaceLineNumber}q;d" ~/.automater_workspaces`
-    ## eliminating spaces ##
+    ## transforming string result to array ##
     IFS='  ' read -r -a apps <<< "$result"
     ## openning apps ##
     for i in `seq 1 ${#apps[@]}`; do
