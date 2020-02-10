@@ -15,7 +15,7 @@ init(){
         exit;
     fi
 
-    var='\n#automater things :P\nif [ -f ~/.automater_aliases ]; then\n. ~/.automater_aliases\nfi'
+    var='\n#automater things :P\nif [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi'
 
     if grep -q 'automater things' /etc/zshrc; then
         echo "you are already good to go 🦋 "
@@ -23,9 +23,9 @@ init(){
     fi
 
     if [ -f /etc/zshrc ]; then
-        `touch ~/.automater_aliases`
+        `touch ~/.zsh_aliases`
         `cp ./worksapceAutomater/automater.sh /usr/local/bin`
-        `echo alias automater='zsh automater.sh' >> /.automater_aliases`
+        `echo alias automater='zsh automater.sh' >> /.zsh_aliases`
         `echo -e $var >> /etc/zshrc`
         else
             echo "make sure your zshrc file is correct & you have right permissions 😩 "
