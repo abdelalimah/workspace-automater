@@ -1,27 +1,46 @@
 #!bin/bash
-# TO-DO : init function
-init(){
-    var='\n#automater things :P\nif [ -f ~/.automater_workspaces ]; then\n. ~/.automater_workspaces\nfi'
-    if [ -f /etc/bashrc ]; then
-        `echo -e $var >> /etc/bashrc`
-        else
-            echo "make sure your bashrc file is correct 😩"
-    fi
-    echo "All set & ready to go , Enjoy your space 🦄 "
-}
 
 # TO-DO : main function
 main(){
     if [ -e ~/.automater_workspaces ]; then
-        echo "+Cooking your workspace 🍫"
+        echo "+Cooking your setup 🍫"
         else
         `touch ~/.automater_workspaces`
     fi
 }
+# TO-DO : init function
+init(){
+    if [ "$#" -gt "1" ]; then
+        check
+        exit;
+    fi
+
+    var='\n#automater things :P\nif [ -f ~/.automater_aliases ]; then\n. ~/.automater_aliases\nfi'
+
+    if grep -q 'automater things' /etc/bashrc; then
+        echo "you are already good to go 🦋 "
+        exit;
+    fi
+
+    if [ -f /etc/bashrc ]; then
+        `touch ~/.automater_aliases`
+        `echo alias automater='bash automater.sh' >> ~/.automater_aliases`
+        `echo -e $var >> /etc/bashrc`
+        else
+            echo "make sure your bashrc file is correct & you have right permissions 😩 "
+            exit;
+    fi
+    main
+    echo "All set & ready to go , Enjoy your work 🦄 "
+}
 
 # TO-DO : create function
 create(){
-    main
+    if [ "$#" -le "2" ]; then
+        check
+        exit;
+    fi
+
     apps=("$@")
     for i in `seq 2 $#`; do
             app+=" "${apps[i]}
@@ -34,7 +53,15 @@ create(){
         echo "++Your workspace is ready 🦊"
     fi
 }
-# create $@
+# TO-DO : resolving app name and verification
+resolve(){
+    app=`cd /Applications/ && find . -iname *$1* -type d -maxdepth 1 && cd`
+    if [[ $app ]]; then
+            echo $app
+        else
+            return 0
+    fi
+}
 # TO-DO : openning apps
 launch(){
     ## getting the line off workspace ##
@@ -52,15 +79,22 @@ launch(){
                     continue
                 else
                     echo "++found ${apps[i]} opening ..🌪 "
-                    `open -a ${apps[i]}`
+                    ## TO FIX AT THE NEXT UPDATE v(app name)##
+                    v1="${result/\.\//}"
+                    v2="${v1/\.app/}"
+                    v3="${v2/ /\ }"
+                    `open -a "${v3}"`
             fi
         fi
     done
-    echo "Done 😎 "
+    echo "Done Enjoy 😎 "
 }
 # TO-DO : start function
 start(){
-        main
+        if [ "$#" -gt "2" ]; then
+        check
+        exit;
+         fi
         if grep -q $2 ~/.automater_workspaces; then
             ## openning apps ##
             launch $@
@@ -68,16 +102,28 @@ start(){
             echo "++$2 workspace do not exist 🤥 , please create your workspace"
         fi
 }
-# start $@
-# TO-DO : resolving app name and verification
-resolve(){
-    app=`cd /Applications/ && find . -iname *$1* -type d -maxdepth 1 && cd`
-    if [[ $app ]]; then
-            echo $app
-        else
-            return 0
+#command error
+check(){
+    if ! grep -q 'automater things' /etc/bashrc; then
+        echo "Please run 'automater setup' first 🛠 "
+        exit;
     fi
+    echo "++Please use valid commands , refer to the documentation to learn more ⛑ "
 }
-# start $@
+#script index
+case $1 in
+        "create")
+            create $@
+        ;;
+        "start")
+            start $@
+        ;;
+        "setup")
+            init $@
+        ;;
+        *)
+            check
+        ;;
+esac
 # TO-DO : delete function
 # TO-DO : close function
