@@ -7,10 +7,10 @@
 git clone https://github.com/abdelalimah/workspaceAutomater.git && sudo bash workspaceAutomater/automater.sh setup && chmod +x  workspaceAutomater/automater.sh && cd && rm -rf workspaceAutomater
 
 ## Creating a workspace
-automater create work_space_name app1_name app2_name ...
+automater create mySpace phpStorm HazeOver ...
 
 ## Launching a workspace
-automater start work_space_name
+automater start mySpace
 
 ## Closing a workspace(on upcoming release)
 automater close work_space_name
