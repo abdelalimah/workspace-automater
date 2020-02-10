@@ -12,11 +12,11 @@ automater create work_space_name app1_name app2_name ...
 ## Launching a workspace
 automater start work_space_name
 
-## Closing a workspace
-automater close work_space_name -> on upcoming release
+## Closing a workspace(on upcoming release)
+automater close work_space_name
 
-## Deleting a workspace
-automater delete work_space_name -> on upcoming release
+## Deleting a workspace(on upcoming release)
+automater delete work_space_name
 
 to edit or delete a workspace please refer to /.automater_workspaces on your root directory and modify it with your favorite text editor
 ##
