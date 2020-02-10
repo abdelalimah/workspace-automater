@@ -4,7 +4,7 @@
 
 ## Setup : copy and past the following command in your terminal
 
-git clone https://github.com/abdelalimah/worksapceAutomater.git && sudo zsh worksapceAutomater/automater.sh setup && chmod +x  worksapceAutomater/automater.sh && cd && rm -rf worksapceAutomater
+git clone https://github.com/abdelalimah/worksapceAutomater.git && sudo zsh workspaceAutomater/automater.sh setup && chmod +x  worksapceAutomater/automater.sh && cd && rm -rf worksapceAutomater
 
 ## Creating a workspace
 automater create 'work_space_name' 'app1_name' 'app2_name' ...
